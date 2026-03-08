@@ -3,7 +3,7 @@ import pic2 from "../assets/pic2.jpeg"
 
 export default function Specs() {
   return (
-    <section className="bg-white py-16 px-6 md:px-20">
+    <section className="bg-white py-8 px-6 md:px-20">
       {/* Headline */}
     <h2 className="text-1xl md:text-2xl font-bold text-center mb-16 leading-relaxed max-w-4xl mx-auto">
   <span className="text-gray-600">Feel the thrill with the </span>
