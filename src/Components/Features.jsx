@@ -8,7 +8,6 @@ import {
     FaLightbulb,
     FaHeadset,
     FaTrophy,
-    FaQuoteLeft,
     FaStar,
     FaShoppingCart,
     FaCheckCircle
@@ -16,6 +15,10 @@ import {
 import { useSwipeable } from "react-swipeable";
 
 import pic3 from "../assets/pic3.png";
+import pic5 from "../assets/pic5.jpg";
+import pic6 from "../assets/pic6.jpg";
+import pic7 from "../assets/pic7.jpg";
+import pic8 from "../assets/pic8.jpg";
 
 const features = [
     { icon: <FaBatteryFull size={24} />, title: "Long Lasting Battery", desc: "High capacity battery engineered for extended driving range." },
@@ -38,25 +41,29 @@ const testimonials = [
         quote: "My kids absolutely love this drift car! The 360° spins and lights make it super exciting to play with.",
         name: "Rahul Sharma",
         role: "Parent & Toy Enthusiast",
-        stars: 5
+        stars: 5,
+        image: pic5
     },
     {
         quote: "The mecanum wheels are amazing. It can drift sideways and do crazy stunts on any surface.",
         name: "Emily Carter",
         role: "RC Hobbyist",
-        stars: 5
+        stars: 5,
+        image: pic6
     },
     {
         quote: "Bought this for my nephew and ended up playing with it myself. The double-sided driving is so cool!",
         name: "Aman Verma",
         role: "Gadget Lover",
-        stars: 5
+        stars: 5,
+        image: pic7
     },
     {
         quote: "Super fun stunt car! The drifting, spinning and LED lights make it perfect for indoor racing.",
         name: "Jason Miller",
         role: "Toy Collector",
-        stars: 5
+        stars: 5,
+        image: pic8
     }
 ];
 
@@ -168,16 +175,28 @@ export default function CarFullSection({ openCheckout }) {
 
         .testi-section { background: #ffffff; padding: 56px 24px 48px; position: relative; overflow: hidden; }
         .testi-section::before { content: ''; position: absolute; top: 0; left: 0; right: 0; height: 4px; background: linear-gradient(90deg, #3b82f6, #f97316, #3b82f6); }
-        .testi-quote-icon { color: #f97316; font-size: 56px; line-height: 1; margin-bottom: -8px; }
-        .testi-text { font-family: 'Rajdhani', sans-serif; font-size: clamp(20px, 3.5vw, 28px); font-weight: 600; color: #1e3a5f; line-height: 1.45; max-width: 720px; margin: 0 auto; text-align: center; }
+        .testi-card { display: flex; flex-direction: column; align-items: center; gap: 20px; }
+        .testi-card-wide { display: flex; flex-direction: row; align-items: center; gap: 40px; max-width: 900px; margin: 0 auto; }
+        .testi-img { width: 120px; height: 120px; border-radius: 50%; object-fit: cover; border: 4px solid #f97316; box-shadow: 0 4px 15px rgba(0,0,0,0.1); }
+        .testi-img-wide { width: 280px; height: 280px; border-radius: 16px; object-fit: cover; border: 4px solid #f97316; box-shadow: 0 8px 25px rgba(0,0,0,0.15); }
+        .testi-content { text-align: center; }
+        .testi-content-wide { text-align: left; flex: 1; }
+        .testi-text { font-family: 'Rajdhani', sans-serif; font-size: clamp(20px, 3.5vw, 28px); font-weight: 600; color: #1e3a5f; line-height: 1.45; max-width: 720px; margin: 0 auto; }
         .testi-text span.highlight { color: #f97316; }
-        .testi-author { font-size: 14px; color: #64748b; font-weight: 500; margin-top: 16px; letter-spacing: 0.04em; text-align: center; }
+        .testi-author { font-size: 14px; color: #64748b; font-weight: 500; margin-top: 16px; letter-spacing: 0.04em; }
         .testi-author strong { color: #1e3a5f; }
         .testi-stars { color: #f97316; font-size: 13px; justify-content: center; }
+        .testi-stars-center { display: flex; justify-content: center; }
         .testi-dots button { width: 8px; height: 8px; border-radius: 50%; border: none; background: #cbd5e1; cursor: pointer; transition: all 0.3s; padding: 0; }
         .testi-dots button.active { background: #f97316; width: 22px; border-radius: 4px; }
         .testi-fade { animation: tfade 0.4s ease; }
         @keyframes tfade { from { opacity: 0; transform: translateY(10px); } to { opacity: 1; transform: translateY(0); } }
+
+        @media (max-width: 768px) {
+          .testi-card-wide { flex-direction: column; text-align: center; }
+          .testi-content-wide { text-align: center; }
+          .testi-img-wide { width: 200px; height: 200px; }
+        }
 
         .divider-line { height: 1px; background: linear-gradient(90deg, transparent, rgba(59,130,246,0.15), rgba(249,115,22,0.15), transparent); }
       `}</style>
@@ -217,74 +236,129 @@ export default function CarFullSection({ openCheckout }) {
             </section>
 
             {/* ── 2. TESTIMONIAL ── */}
-            <div className="testi-section" {...handlers}>
-                <div className="max-w-3xl mx-auto">
-                    <div className="testi-quote-icon flex justify-center">
-                        <FaQuoteLeft style={{ fontSize: '36px' }} />
-                    </div>
-                    <div key={activeTestimonial} className="testi-fade">
-                        <p className="testi-text">
-                            {t.quote.includes("get you where you need to go") ? (
-                                <>{t.quote.split("get you where you need to go")[0]}
-                                    <span className="highlight">get you where you need to go</span>{t.quote.split("get you where you need to go")[1]}</>
-                            ) : t.quote}
-                        </p>
-                        <div className="flex testi-stars gap-1 mt-3">{Array(t.stars).fill(0).map((_, i) => <FaStar key={i} />)}</div>
-                        <p className="testi-author mt-2"><strong>{t.name}</strong> | {t.role}</p>
-                    </div>
-                    <div className="testi-dots flex justify-center gap-2 mt-5">
-                        {testimonials.map((_, i) => (
-                            <button key={i} className={i === activeTestimonial ? "active" : ""} onClick={() => setActiveTestimonial(i)} />
-                        ))}
-                    </div>
-                </div>
-            </div>
+           {/* ── 2. TESTIMONIAL ── */}
+<div className="bg-white py-8 px-4" {...handlers}>
 
-            <div className="divider-line" />
+  <div className="max-w-7xl mx-auto">
+
+    <div key={activeTestimonial} className="transition-all duration-300">
+
+      <div className="flex flex-col md:flex-row md:items-center gap-6 md:gap-10 w-full bg-white rounded-xl p-6 md:p-8 shadow-md border border-slate-200">
+
+        {/* IMAGE */}
+        <img
+          src={t.image}
+          alt={t.name}
+          className="w-28 h-28 md:w-44 md:h-44 mx-auto md:mx-0 object-cover rounded-lg border border-orange-400 flex-shrink-0"
+        />
+
+        {/* CONTENT */}
+        <div className="flex-1 text-center md:text-left">
+
+          <p className="font-semibold text-slate-800 text-lg md:text-2xl leading-relaxed">
+            {t.quote}
+          </p>
+
+          <div className="flex justify-center md:justify-start text-orange-500 gap-1 mt-3">
+            {Array(t.stars).fill(0).map((_, i) => (
+              <FaStar key={i} />
+            ))}
+          </div>
+
+          <p className="text-sm text-slate-500 mt-2">
+            <span className="font-semibold text-slate-800">{t.name}</span> | {t.role}
+          </p>
+
+        </div>
+
+      </div>
+
+    </div>
+
+    {/* DOTS */}
+    <div className="flex justify-center gap-2 mt-6">
+      {testimonials.map((_, i) => (
+        <button
+          key={i}
+          className={`h-2 rounded-full transition-all ${
+            i === activeTestimonial
+              ? "w-6 bg-orange-500"
+              : "w-2 bg-slate-300"
+          }`}
+          onClick={() => setActiveTestimonial(i)}
+        />
+      ))}
+    </div>
+
+  </div>
+
+</div>
             {/* ── 3. PRODUCT + HIGHLIGHTS (white bg, clean text) ── */}
-            <div style={{ background: '#ffffff', padding: '56px 24px', borderTop: '1px solid #f1f5f9' }}>
+            <div style={{ background: '#ffffff', padding: '40px 24px', borderTop: '1px solid #f1f5f9' }}>
                 <div className="max-w-6xl mx-auto">
                     <div className="flex flex-col md:flex-row gap-16 items-start">
 
                         {/* Left */}
                         <div className="flex-1 min-w-0">
 
-    <div style={{ display: 'flex', alignItems: 'baseline', gap: '10px', marginTop: '20px', flexWrap: 'wrap' }}>
- <span style={{ fontFamily: "'Rajdhani', sans-serif", fontSize: 'clamp(28px,4vw,40px)', fontWeight: 700, color: '#1e293b' }}>
-  <span style={{ fontSize: '0.55em', color: '#94a3b8',
-     verticalAlign: 'super', marginRight: '2px' }}>₹</span>599
-                                </span>
-            <span style={{ fontSize: '15px', color: '#cbd5e1', textDecoration: 'line-through' }}>₹899</span>
- <span style={{ background: 'linear-gradient(135deg,#f97316,#fb923c)', color: 'white', fontSize: '11px', 
-    fontWeight: 600, padding: '3px 10px', borderRadius: '999px', textTransform: 'uppercase' }}>
-                                    Save 16%
-                                </span>
-                            </div>
-                            <ul style={{ listStyle: 'none', padding: 0, margin: '14px 0 0' }}>
-                                {["Free home delivery across India", "0% EMI available for 24 months", "Government EV subsidy applicable"].map((p, i) => (
-                                    <li key={i} style={{ display: 'flex', alignItems: 'center', gap: '10px', fontSize: '13px', color: '#64748b', padding: '5px 0' }}>
-                                        <FaCheckCircle size={13} style={{ color: '#22c55e', flexShrink: 0 }} /> {p}
-                                    </li>
-                                ))}
-                            </ul>
-                            <div style={{ display: 'flex', gap: '12px', marginTop: '24px', flexWrap: 'wrap' }}>
-                                <button
-                                    onClick={openCheckout}
-                                    style={{
-                                        display: 'inline-flex', alignItems: 'center', gap: '10px',
-                                        background: 'linear-gradient(135deg,#f97316,#ea580c)',
-                                        color: 'white', fontFamily: "'Rajdhani', sans-serif", fontSize: '16px',
-                                        fontWeight: 700, letterSpacing: '0.08em', textTransform: 'uppercase',
-                                        padding: '13px 30px', border: 'none', borderRadius: '6px', cursor: 'pointer'
-                                    }}
-                                >
-                                    <FaShoppingCart size={16} />
-                                    Buy Now
-                                </button>
+  <div style={{ display: 'flex', alignItems: 'baseline', gap: '10px', marginTop: '20px', flexWrap: 'wrap' }}>
 
+    {/* Discount */}
+    <span style={{ fontSize: '32px', fontWeight: 600, color: '#dc2626',  }}>
+      -60%
+    </span>
 
-                            </div>
-                        </div>
+    {/* Price */}
+    <span style={{ fontFamily: "'Rajdhani', sans-serif", fontSize: 'clamp(28px,4vw,40px)', fontWeight: 700, color: '#1e293b' }}>
+      <span style={{ fontSize: '0.55em', color: '#94a3b8', verticalAlign: 'super', marginRight: '2px' }}>₹</span>
+      599
+    </span>
+
+    {/* MRP */}
+    <span style={{ fontSize: '18px', color: '#cbd5e1', textDecoration: 'line-through' }}>
+      ₹1,499
+    </span>
+
+  </div>
+
+  <ul style={{ listStyle: 'none', padding: 0, margin: '14px 0 0' }}>
+    {[
+      "Free home delivery across India",
+      "0% EMI available for 24 months",
+      "Government EV subsidy applicable"
+    ].map((p, i) => (
+      <li key={i} style={{ display: 'flex', alignItems: 'center', gap: '10px', fontSize: '13px', color: '#64748b', padding: '5px 0' }}>
+        <FaCheckCircle size={13} style={{ color: '#22c55e', flexShrink: 0 }} /> {p}
+      </li>
+    ))}
+  </ul>
+
+  <div style={{ display: 'flex', gap: '12px', marginTop: '24px', flexWrap: 'wrap' }}>
+    <button
+      onClick={openCheckout}
+      style={{
+        display: 'inline-flex',
+        alignItems: 'center',
+        gap: '10px',
+        background: 'linear-gradient(135deg,#f97316,#ea580c)',
+        color: 'white',
+        fontFamily: "'Rajdhani', sans-serif",
+        fontSize: '16px',
+        fontWeight: 700,
+        letterSpacing: '0.08em',
+        textTransform: 'uppercase',
+        padding: '13px 30px',
+        border: 'none',
+        borderRadius: '6px',
+        cursor: 'pointer'
+      }}
+    >
+      <FaShoppingCart size={16} />
+      Buy Now
+    </button>
+  </div>
+
+</div>
 
                         {/* Right — clean text highlights */}
                         <div style={{ flex: 1, minWidth: 0 }}>

@@ -26,6 +26,7 @@ export default function Hero({ openCheckout }) {
       }}
       className="flex flex-col md:grid md:grid-cols-2 items-center gap-2 px-6 md:px-30 min-h-[25vh] overflow-hidden bg-gray-100 py-6 md:py-0"
     >
+
       {/* Product Image - upar mobile mein */}
       <div className="relative flex flex-col items-center w-full order-1 md:order-1">
         <motion.div
@@ -48,16 +49,38 @@ export default function Hero({ openCheckout }) {
       </div>
 
       {/* Product Text - neeche mobile mein */}
-      <div className="z-10 order-2 md:order-2  text-center md:text-left w-full">
+      <div className="z-10 order-2 md:order-2 text-center md:text-left w-full">
+
         <h1 className="text-3xl md:text-5xl font-bold text-[#1e3a8a]">
           DriftX 360° Stunt RC Car
         </h1>
-        <p className="mt-3 text-gray-600 text-sm md:text-base text-center">
+
+        <p className="mt-3 text-gray-600 text-sm md:text-base text-center md:text-left">
           360° Rotating Stunt RC Car with 2.4GHz Remote Control – Dual-Sided 4WD Drift Car with LED Lights, High-Speed Off-Road Climbing Toy for Kids & Adults (Rechargeable, Age 5+)
         </p>
-        <h2 className="text-2xl md:text-3xl font-bold mt-2">
-          ₹599
-        </h2>
+
+        {/* Pricing Section */}
+        <div className="mt-4">
+
+          {/* Discount + Price */}
+          <div className="flex items-center gap-3 justify-center md:justify-start">
+            <span className="text-red-600 text-3xl font-normal">
+              -60%
+            </span>
+
+            <span className="text-4xl font-bold text-black">
+              ₹599
+            </span>
+          </div>
+
+          {/* MRP */}
+          <div className="text-gray-600 mt-1 text-base flex items-center gap-2 justify-center md:justify-start">
+            <span>M.R.P.:</span>
+            <span className="line-through">₹1,499</span>
+          </div>
+
+        </div>
+
         <motion.button
           className="mt-5 bg-[#ff7a00] text-white px-8 py-3 rounded-lg hover:scale-105 transition"
           initial={{ opacity: 0, y: 20 }}
@@ -69,6 +92,7 @@ export default function Hero({ openCheckout }) {
         >
           Buy Now
         </motion.button>
+
       </div>
     </section>
   )
