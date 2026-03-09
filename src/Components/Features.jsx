@@ -324,8 +324,8 @@ export default function CarFullSection({ openCheckout }) {
   <ul style={{ listStyle: 'none', padding: 0, margin: '14px 0 0' }}>
     {[
       "Free home delivery across India",
-      "0% EMI available for 24 months",
-      "Government EV subsidy applicable"
+      "360° drift & stunt mode enabled",
+      "Rechargeable battery, long play time"
     ].map((p, i) => (
       <li key={i} style={{ display: 'flex', alignItems: 'center', gap: '10px', fontSize: '13px', color: '#64748b', padding: '5px 0' }}>
         <FaCheckCircle size={13} style={{ color: '#22c55e', flexShrink: 0 }} /> {p}
