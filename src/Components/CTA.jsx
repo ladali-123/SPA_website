@@ -6,12 +6,10 @@ import {
   Truck,
   MapPin,
   User,
-  MailIcon,
   PhoneIcon,
   Home,
   Building2,
   Hash,
-  FileText,
   ChevronLeft,
   ShoppingCart,
   ArrowRight,
@@ -114,7 +112,6 @@ const DeliveryForm = ({ data, onChange, onNext }) => {
         <InputField label="First Name" name="firstName" placeholder="Enter first name" value={data.firstName} onChange={onChange} required icon={User} />
         <InputField label="Last Name" name="lastName" placeholder="Enter last name" value={data.lastName} onChange={onChange} required icon={User} />
       </div>
-      <InputField label="Email Address" name="email" type="email" placeholder="Enter email address" value={data.email} onChange={onChange} required icon={MailIcon} />
       <InputField label="Phone Number" name="phone" type="tel" placeholder="+91 98765 43210" value={data.phone} onChange={onChange} required icon={PhoneIcon} />
       <InputField label="Address Line 1" name="address1" placeholder="House No., Street Name" value={data.address1} onChange={onChange} required icon={Home} />
       <InputField label="Address Line 2" name="address2" placeholder="Apartment, Colony (optional)" value={data.address2} onChange={onChange} icon={Building2} />
@@ -124,9 +121,7 @@ const DeliveryForm = ({ data, onChange, onNext }) => {
       </div>
       <div className="grid grid-cols-1 sm:grid-cols-2 gap-3 md:gap-4">
         <InputField label="PIN Code" name="pin" placeholder="400001" value={data.pin} onChange={onChange} required icon={Hash} />
-        <InputField label="Delivery Type" name="deliveryType" placeholder="Standard / Express" value={data.deliveryType} onChange={onChange} required icon={Truck} />
       </div>
-      <InputField label="Delivery Instructions" name="instructions" placeholder="Leave at door, call on arrival, etc." value={data.instructions} onChange={onChange} icon={FileText} />
 
       <button type="submit"
         className="w-full mt-4 md:mt-6 bg-emerald-600 hover:bg-emerald-700 text-white font-bold py-3 md:py-3.5 rounded-2xl
@@ -224,9 +219,9 @@ const NeedHelp = () => (
 export default function CheckoutFlow({ isOpen, onClose }) {
   const [step, setStep] = useState(1);
   const [delivery, setDelivery] = useState({
-    firstName:"", lastName:"", email:"", phone:"",
+    firstName:"", lastName:"", phone:"",
     address1:"", address2:"", city:"", pin:"",
-    state:"", deliveryType:"", instructions:""
+    state:""
   });
 
   const amount = 599;
